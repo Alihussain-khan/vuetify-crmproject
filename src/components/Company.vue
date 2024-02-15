@@ -8,12 +8,17 @@
         <!-- <v-btn variant="flat" class="bg-green">Add Company</v-btn> -->
       </v-layout>
     </v-row>
+    <v-row>
+      <CompanyTable />
+    </v-row>
   </v-container>
 </template>
 
 <script>
 import AddCompany from "./AddCompany.vue";
-export default { components: { AddCompany } };
+import CompanyTable from "./CompanyTable.vue";
+
+export default { components: { AddCompany, CompanyTable } };
 </script>
 
 <style lang="scss" scoped></style>
