@@ -19,25 +19,42 @@
           <td>{{ item.username }}</td>
           <td>{{ item.useremail }}</td>
           <td>
-            <v-chip variant="elevated" class="bg-red" @click="del(index)"
+            <v-chip
+              variant="elevated"
+              class="bg-red-lighten-1"
+              @click="del(index)"
               >X</v-chip
             >
           </td>
           <td>
-            <v-chip variant="elevated" class="bg-error" @click="up(index)"
-              >update</v-chip
-            >
+            <UpdateCompany :arrindex="index" :item="item" />
           </td>
         </tr>
       </tbody>
     </v-table>
   </v-container>
+  <v-snackbar
+    v-model="snackbar"
+    color="red-lighten-1"
+    rounded="pill"
+    :timeout="2000"
+  >
+    <span class="text-white">Deleted!!</span>
+
+    <template v-slot:actions>
+      <v-btn color="white" variant="text" @click="snackbar = false">
+        Close
+      </v-btn>
+    </template>
+  </v-snackbar>
 </template>
 
 <script>
+import UpdateCompany from "@/components/UpdateCompany.vue";
 export default {
   data() {
     return {
+      snackbar: false,
       currentcompanies: null,
     };
   },
@@ -55,8 +72,13 @@ export default {
         "companydata",
         JSON.stringify(this.currentcompanies)
       );
-      console.log(e);
+
+      this.snackbar = true;
     },
+    // updatetable(e) {
+    //   this.currentcompanies = JSON.parse(localStorage.getItem("companydata"));
+    //   console.log(e);
+    // },
   },
 };
 </script>

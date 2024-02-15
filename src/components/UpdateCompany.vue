@@ -1,18 +1,18 @@
 <template>
   <v-dialog width="500" transition="dialog-top-transition">
     <template v-slot:activator="{ props }">
-      <v-btn
+      <v-chip
         v-bind="props"
-        text="Add Company"
+        text="Update"
         variant="flat"
-        class="bg-green-lighten-1"
+        class="bg-orange-lighten-1 text-white"
       >
-      </v-btn>
+      </v-chip>
     </template>
     <template v-slot:default="{ isActive }">
       <v-card>
         <v-card-title class="mt-2">
-          <span class="text-h5">Add Company</span>
+          <span class="text-h5">Update Company</span>
         </v-card-title>
         <v-container>
           <v-form ref="form" v-model="valid">
@@ -22,13 +22,11 @@
                 v-model="company.companyname"
                 :rules="companyrules"
                 clearable
-                label="Company Name"
                 required
               ></v-text-field>
 
               <v-text-field
                 class="mb-2"
-                label="User name"
                 v-model="company.username"
                 :rules="userrules"
                 clearable
@@ -36,16 +34,13 @@
 
               <v-text-field
                 class="mb-2"
-                label="Email"
                 v-model="company.useremail"
-                :rules="emailrules"
                 clearable
                 required
               ></v-text-field>
 
               <v-text-field
                 class="mb-2"
-                type="password"
                 v-model="company.password"
                 :rules="passwordrules"
                 clearable
@@ -72,11 +67,11 @@
   </v-dialog>
   <v-snackbar
     v-model="snackbar"
-    color="green-lighten-1"
+    color="orange-lighten-1"
     rounded="pill"
     :timeout="2000"
   >
-    <span class="text-white">Added!!</span>
+    <span class="text-white">Updated!!</span>
 
     <template v-slot:actions>
       <v-btn color="white" variant="text" @click="snackbar = false">
@@ -88,16 +83,18 @@
 
 <script>
 export default {
+  props: ["arrindex", "item"],
   data() {
     return {
       company: {
-        companyname: null,
-        username: null,
-        useremail: null,
-        password: null,
+        companyname: this.item.companyname,
+        username: this.item.username,
+        useremail: this.item.useremail,
+        password: this.item.password,
       },
       snackbar: false,
       valid: false,
+
       companyrules: [
         (value) => {
           if (value) return true;
@@ -151,20 +148,26 @@ export default {
     };
   },
   methods: {
-    async printcompany() {
+    printcompany() {
       if (this.$refs.form.validate() && this.valid) {
         console.log(this.company);
         const currentcompanies =
           JSON.parse(localStorage.getItem("companydata")) || [];
-        console.log(currentcompanies);
-        currentcompanies.push(this.company);
-        console.log(currentcompanies);
+        currentcompanies[this.arrindex] = this.company;
         // Store the object into storage
         localStorage.setItem("companydata", JSON.stringify(currentcompanies));
         // this.$emit("update-event", "Hello from ChildComponent!");
+
         this.snackbar = true;
       }
     },
+    savepropdata() {
+      //   console.log(props.item);
+    },
+  },
+
+  mounted() {
+    this.savepropdata();
   },
 };
 </script>
