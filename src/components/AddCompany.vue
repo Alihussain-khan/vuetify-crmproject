@@ -56,12 +56,7 @@
               >
                 Close
               </v-btn>
-              <v-btn
-                v-if="!valid && 'disable'"
-                color="blue-darken-1"
-                variant="text"
-                @click="printcompany"
-              >
+              <v-btn color="blue-darken-1" variant="text" @click="printcompany">
                 Save
               </v-btn>
             </v-card-actions>
@@ -139,6 +134,13 @@ export default {
     async printcompany() {
       if (this.$refs.form.validate() && this.valid) {
         console.log(this.company);
+        const currentcompanies =
+          JSON.parse(localStorage.getItem("companydata")) || [];
+        console.log(currentcompanies);
+        currentcompanies.push(this.company);
+        console.log(currentcompanies);
+        // Store the object into storage
+        localStorage.setItem("companydata", JSON.stringify(currentcompanies));
         alert("added");
       }
     },
