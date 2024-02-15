@@ -57,7 +57,7 @@
                     </v-col>
                     <v-col>
                       <v-btn
-                        class="text-red ma-1"
+                        class="text-white ma-1"
                         variant="tonal"
                         @click="this.video.play()"
                         ><v-tooltip activator="parent" location="bottom"
@@ -67,8 +67,8 @@
                     </v-col>
                     <v-col>
                       <v-btn
-                        class="text-blue ma-1"
-                        variant="outlined"
+                        class="bg-blue ma-1"
+                        variant="elevated"
                         @click="saveimage"
                       >
                         submit</v-btn

@@ -1,8 +1,10 @@
 <template>
-  <div>dashboard</div>
+  <SideBar />
+  <RouterView />
 </template>
 
 <script>
+import SideBar from "@/components/SideBar.vue";
 export default {};
 </script>
 
