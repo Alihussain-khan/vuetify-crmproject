@@ -52,7 +52,7 @@
               <v-btn
                 color="blue-darken-1"
                 variant="text"
-                @click="dialog = false"
+                @click="isActive.value = false"
               >
                 Close
               </v-btn>

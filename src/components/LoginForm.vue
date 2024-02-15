@@ -172,7 +172,7 @@ export default {
           userimage: this.userimage,
         };
         console.log(this.finaldata);
-        router.push("/dashboard");
+        router.push("/company");
       } else {
         console.log("empty");
       }
