@@ -9,7 +9,7 @@
           <v-text-field
             class="mb-2"
             label="email"
-            v-model="useremail"
+            v-model="mail"
             :rules="emailrules"
             clearable
           ></v-text-field>
@@ -67,7 +67,7 @@
                     </v-col>
                     <v-col>
                       <v-btn
-                        class="bg-blue ma-1"
+                        class="text-blue ma-1"
                         variant="elevated"
                         @click="saveimage"
                       >
@@ -101,8 +101,8 @@ import router from "@/router";
 export default {
   data() {
     return {
-      password: null,
-      useremail: null,
+      password: "",
+      mail: "",
       userimage: null,
       finaldata: {},
       disable: true,
@@ -142,7 +142,7 @@ export default {
   watch: {
     // this is checking the validation on each input tap
     //activates the button when everything is good
-    useremail() {
+    mail() {
       this.validate();
     },
     password() {
@@ -168,7 +168,7 @@ export default {
         //assigning the data to method before moving to next page
         this.finaldata = {
           password: this.password,
-          useremail: this.useremail,
+          mail: this.mail,
           userimage: this.userimage,
         };
         console.log(this.finaldata);
@@ -201,10 +201,10 @@ export default {
     //data validation if validation is good, it will activate the submit button
     validate() {
       if (
-        this.useremail &&
+        this.mail &&
         this.password.length >= 8 &&
         this.password &&
-        /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(this.useremail) &&
+        /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(this.mail) &&
         this.userimage
       ) {
         this.disable = false;
