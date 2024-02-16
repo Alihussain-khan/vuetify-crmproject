@@ -85,6 +85,20 @@
       </v-btn>
     </template>
   </v-snackbar>
+  <v-snackbar
+    v-model="errorsnackbar"
+    color="red-lighten-1"
+    rounded="pill"
+    :timeout="2000"
+  >
+    <span class="text-white">form not valid</span>
+
+    <template v-slot:actions>
+      <v-btn color="white" variant="text" @click="errorsnackbar = false">
+        Close
+      </v-btn>
+    </template>
+  </v-snackbar>
 </template>
 
 <script>
@@ -98,6 +112,7 @@ export default {
         password: null,
       },
       snackbar: false,
+      errorsnackbar: false,
       valid: false,
       companyrules: [
         (value) => {
@@ -164,6 +179,8 @@ export default {
         localStorage.setItem("companydata", JSON.stringify(currentcompanies));
         this.$emit("update-event");
         this.snackbar = true;
+      } else {
+        this.errorsnackbar = true;
       }
     },
   },
