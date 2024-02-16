@@ -9,7 +9,7 @@
       </v-layout>
     </v-row>
     <v-row>
-      <CompanyTable />
+      <CompanyTable @update-event="upd" />
     </v-row>
   </v-container>
 </template>
@@ -18,7 +18,14 @@
 import AddCompany from "./AddCompany.vue";
 import CompanyTable from "./CompanyTable.vue";
 
-export default { components: { AddCompany, CompanyTable } };
+export default {
+  components: { AddCompany, CompanyTable },
+  methods: {
+    upd() {
+      console.log("getting there");
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped></style>

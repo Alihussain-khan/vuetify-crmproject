@@ -156,7 +156,7 @@ export default {
         currentcompanies[this.arrindex] = this.company;
         // Store the object into storage
         localStorage.setItem("companydata", JSON.stringify(currentcompanies));
-        // this.$emit("update-event", "Hello from ChildComponent!");
+        this.$emit("update-event");
 
         this.snackbar = true;
       }

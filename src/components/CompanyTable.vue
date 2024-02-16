@@ -8,7 +8,13 @@
           <th class="text-left bg-white">User</th>
           <th class="text-left bg-white">Email</th>
           <th class="text-left bg-white"></th>
-          <th class="text-left bg-white"></th>
+          <th class="text-left bg-white">
+            <v-chip @click="upd"
+              ><v-tooltip activator="parent" location="right"
+                >refresh table</v-tooltip
+              ><v-icon>mdi-refresh</v-icon></v-chip
+            >
+          </th>
         </tr>
       </thead>
 
@@ -27,7 +33,7 @@
             >
           </td>
           <td>
-            <UpdateCompany :arrindex="index" :item="item" />
+            <UpdateCompany @update-event="upd" :arrindex="index" :item="item" />
           </td>
         </tr>
       </tbody>
@@ -47,21 +53,35 @@
       </v-btn>
     </template>
   </v-snackbar>
+  <v-snackbar
+    v-model="refreshsnackbar"
+    color="indigo-lighten-1"
+    rounded="pill"
+    :timeout="2000"
+  >
+    <span class="text-white">Table refreshed!!</span>
+
+    <template v-slot:actions>
+      <v-btn color="white" variant="text" @click="refreshsnackbar = false">
+        Close
+      </v-btn>
+    </template>
+  </v-snackbar>
 </template>
 
 <script>
 import UpdateCompany from "@/components/UpdateCompany.vue";
+
 export default {
   data() {
     return {
       snackbar: false,
+      refreshsnackbar: false,
       currentcompanies: null,
     };
   },
-
   mounted() {
     this.currentcompanies = JSON.parse(localStorage.getItem("companydata"));
-
     console.log(this.currentcompanies);
   },
   methods: {
@@ -72,14 +92,14 @@ export default {
         "companydata",
         JSON.stringify(this.currentcompanies)
       );
-
       this.snackbar = true;
     },
-    // updatetable(e) {
-    //   this.currentcompanies = JSON.parse(localStorage.getItem("companydata"));
-    //   console.log(e);
-    // },
+    upd() {
+      this.currentcompanies = JSON.parse(localStorage.getItem("companydata"));
+      this.refreshsnackbar = true;
+    },
   },
+  components: {},
 };
 </script>
 

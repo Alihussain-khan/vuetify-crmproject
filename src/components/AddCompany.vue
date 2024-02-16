@@ -2,6 +2,7 @@
   <v-dialog width="500" transition="dialog-top-transition">
     <template v-slot:activator="{ props }">
       <v-btn
+        @update-event="upd"
         v-bind="props"
         text="Add Company"
         variant="flat"
@@ -161,7 +162,7 @@ export default {
         console.log(currentcompanies);
         // Store the object into storage
         localStorage.setItem("companydata", JSON.stringify(currentcompanies));
-        // this.$emit("update-event", "Hello from ChildComponent!");
+        this.$emit("update-event");
         this.snackbar = true;
       }
     },
