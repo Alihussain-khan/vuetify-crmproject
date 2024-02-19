@@ -16,14 +16,17 @@ import { createVuetify } from "vuetify";
 const customDarkTheme = {
   dark: true,
   colors: {
-    background: "#15202b",
-    surface: "#15202b",
-    primary: "#3f51b5",
+    background: "#2e1437",
+    surface: "#51425f",
+    primary: "#948e99",
     secondary: "#03dac6",
     error: "#FF9843",
     info: "#2196F3",
     success: "#4caf50",
     warning: "#fb8c00",
+    addbutton: "#e7eed0",
+    chipupdate: "#ac4147",
+    chipshow: "#b9d7d9",
   },
 };
 
