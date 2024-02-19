@@ -23,8 +23,34 @@
         <v-list-item prepend-icon="mdi-view-dashboard" title="Dashboard">
         </v-list-item>
       </RouterLink> -->
+
       <RouterLink to="/company" class="text-decoration-none text-white">
-        <v-list-item prepend-icon="mdi-domain" title="Companies"> </v-list-item>
+        <v-tooltip activator="parent" location="right">Comapnies</v-tooltip>
+        <v-list-item
+          prepend-icon="mdi-domain"
+          title="Companies"
+          class="customclass"
+        >
+        </v-list-item>
+      </RouterLink>
+
+      <RouterLink to="/department" class="text-decoration-none text-white">
+        <v-tooltip activator="parent" location="right">Departments</v-tooltip>
+        <v-list-item
+          prepend-icon="mdi-apps"
+          title="Departments"
+          class="customclass"
+        >
+        </v-list-item>
+      </RouterLink>
+      <RouterLink to="/user" class="text-decoration-none text-white">
+        <v-tooltip activator="parent" location="right">Users</v-tooltip>
+        <v-list-item
+          prepend-icon="mdi-account"
+          title="Users"
+          class="customclass"
+        >
+        </v-list-item>
       </RouterLink>
     </v-list>
   </v-navigation-drawer>
@@ -44,4 +70,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.customclass:hover {
+  background-color: #948e99;
+}
+</style>
