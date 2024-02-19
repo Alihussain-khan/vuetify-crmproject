@@ -5,9 +5,8 @@
         <tr>
           <th class="text-left bg-white">Count</th>
           <th class="text-left bg-white">Company Name</th>
-          <th class="text-left bg-white">User</th>
-          <th class="text-left bg-white">Email</th>
-          <th class="text-left bg-white"></th>
+          <th class="text-left bg-white">Department</th>
+          <th class="text-left bg-white">Employees</th>
           <th class="text-left bg-white"></th>
           <th class="text-left bg-white">
             <v-chip @click="upd"
@@ -20,11 +19,11 @@
       </thead>
 
       <tbody>
-        <tr v-for="(item, index) in currentcompanies" :key="index">
+        <tr v-for="(item, index) in currentdepartments" :key="index">
           <td>{{ index + 1 }}</td>
-          <td>{{ item.companyname }}</td>
-          <td>{{ item.username }}</td>
-          <td>{{ item.useremail }}</td>
+          <td>{{ item.dcompanyname }}</td>
+          <td>{{ item.department }}</td>
+          <td>{{ item.employess }}</td>
           <td>
             <v-chip
               variant="elevated"
@@ -34,10 +33,11 @@
             >
           </td>
           <td>
-            <UpdateCompany @update-event="upd" :arrindex="index" :item="item" />
-          </td>
-          <td>
-            <CompanyDepartments :arrindex="index" :item="item" />
+            <Updatedepartment
+              @update-event="upd"
+              :arrindex="index"
+              :item="item"
+            />
           </td>
         </tr>
       </tbody>
@@ -74,35 +74,35 @@
 </template>
 
 <script>
-import UpdateCompany from "@/components/UpdateCompany.vue";
-import CompanyDepartments from "@/components/CompanyDepartments.vue";
-
+import Updatedepartment from "@/components/Deparmtents/Updatedepartment.vue";
 export default {
   data() {
     return {
       snackbar: false,
       refreshsnackbar: false,
-      currentcompanies: "",
-      username: "",
+      currentdepartments: null,
     };
   },
   mounted() {
-    this.currentcompanies = JSON.parse(localStorage.getItem("companydata"));
-    this.username = this.currentcompanies[0].username;
-    console.log(this.currentcompanies);
+    this.currentdepartments = JSON.parse(
+      localStorage.getItem("departmentdata")
+    );
+    console.log(this.currentdepartments);
   },
   methods: {
     del(e) {
       // this.currentcompanies =
-      this.currentcompanies.splice(e, 1);
+      this.currentdepartments.splice(e, 1);
       localStorage.setItem(
-        "companydata",
-        JSON.stringify(this.currentcompanies)
+        "departmentdata",
+        JSON.stringify(this.currentdepartments)
       );
       this.snackbar = true;
     },
     upd() {
-      this.currentcompanies = JSON.parse(localStorage.getItem("companydata"));
+      this.currentdepartments = JSON.parse(
+        localStorage.getItem("departmentdata")
+      );
       this.refreshsnackbar = true;
     },
   },

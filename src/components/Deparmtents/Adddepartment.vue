@@ -4,7 +4,7 @@
       <v-btn
         @update-event="upd"
         v-bind="props"
-        text="Add Company"
+        text="Add Department"
         variant="flat"
         class="bg-green-lighten-1"
       >
@@ -13,14 +13,14 @@
     <template v-slot:default="{ isActive }">
       <v-card>
         <v-card-title class="mt-2">
-          <span class="text-h5">Add Company</span>
+          <span class="text-h5">Add Department</span>
         </v-card-title>
         <v-container>
           <v-form ref="form" v-model="valid">
             <v-card-text>
               <v-text-field
                 class="mb-2"
-                v-model="company.companyname"
+                v-model="department.dcompanyname"
                 :rules="companyrules"
                 clearable
                 label="Company Name"
@@ -29,28 +29,19 @@
 
               <v-text-field
                 class="mb-2"
-                label="User name"
-                v-model="company.username"
-                :rules="userrules"
+                label="Department name"
+                v-model="department.department"
+                :rules="departmentrules"
                 clearable
               ></v-text-field>
 
               <v-text-field
                 class="mb-2"
-                label="Email"
-                v-model="company.useremail"
-                :rules="emailrules"
+                label="number of employees"
+                v-model="department.employess"
+                :rules="employessrules"
                 clearable
                 required
-              ></v-text-field>
-
-              <v-text-field
-                class="mb-2"
-                type="password"
-                v-model="company.password"
-                :rules="passwordrules"
-                clearable
-                label="Password"
               ></v-text-field>
             </v-card-text>
             <v-card-actions>
@@ -105,12 +96,13 @@
 export default {
   data() {
     return {
-      company: {
-        companyname: "",
-        username: "",
-        useremail: "",
-        password: "",
+      department: {
+        dcompanyname: null,
+        department: null,
+        employess: null,
       },
+      currentdepartments: "",
+      currentcompanies: "",
       snackbar: false,
       errorsnackbar: false,
       valid: false,
@@ -125,8 +117,19 @@ export default {
 
           return "* Company Name Cannot be less than 3 characters";
         },
+        (value) => {
+          let validatecompany = this.currentcompanies.filter((element) => {
+            return value === element.companyname;
+          });
+          console.log(validatecompany);
+          if (validatecompany.length != 0) {
+            return true;
+          } else {
+            return "* Company Not Found";
+          }
+        },
       ],
-      userrules: [
+      departmentrules: [
         (value) => {
           if (value) return true;
 
@@ -135,33 +138,21 @@ export default {
         (value) => {
           if (value.length >= 3) return true;
 
-          return "* Name Cannot be less than 3 characters";
+          return "* Department Name Cannot be less than 3 characters";
         },
       ],
-      emailrules: [
+      employessrules: [
         (value) => {
           if (value) return true;
 
           return "* Field Cannot Be Empty.";
         },
         (value) => {
-          if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value)) {
+          if (!isNaN(value)) {
             return true;
           }
 
-          return "* Enter Valid email";
-        },
-      ],
-      passwordrules: [
-        (value) => {
-          if (value) return true;
-
-          return "* Field Cannot Be Empty.";
-        },
-        (value) => {
-          if (value.length >= 8) return true;
-
-          return "* Password Cannot be less than 8";
+          return "* Enter Valid number";
         },
       ],
     };
@@ -169,20 +160,27 @@ export default {
   methods: {
     async printcompany() {
       if (this.$refs.form.validate() && this.valid) {
-        console.log(this.company);
-        const currentcompanies =
-          JSON.parse(localStorage.getItem("companydata")) || [];
-        console.log(currentcompanies);
-        currentcompanies.push(this.company);
-        console.log(currentcompanies);
+        console.log(this.department);
+        this.currentdepartments =
+          JSON.parse(localStorage.getItem("departmentdata")) || [];
+        console.log(this.currentdepartments);
+        this.currentdepartments.push(this.department);
+        console.log(this.currentdepartments);
         // Store the object into storage
-        localStorage.setItem("companydata", JSON.stringify(currentcompanies));
+        localStorage.setItem(
+          "departmentdata",
+          JSON.stringify(this.currentdepartments)
+        );
         this.$emit("update-event");
         this.snackbar = true;
       } else {
         this.errorsnackbar = true;
       }
     },
+  },
+  mounted() {
+    this.currentcompanies =
+      JSON.parse(localStorage.getItem("companydata")) || [];
   },
 };
 </script>

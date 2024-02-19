@@ -1,26 +1,25 @@
 <template>
   <v-dialog width="500" transition="dialog-top-transition">
     <template v-slot:activator="{ props }">
-      <v-btn
-        @update-event="upd"
+      <v-chip
         v-bind="props"
-        text="Add Company"
+        text="Update"
         variant="flat"
-        class="bg-green-lighten-1"
+        class="bg-orange-lighten-1 text-white"
       >
-      </v-btn>
+      </v-chip>
     </template>
     <template v-slot:default="{ isActive }">
       <v-card>
         <v-card-title class="mt-2">
-          <span class="text-h5">Add Company</span>
+          <span class="text-h5">Update Department</span>
         </v-card-title>
         <v-container>
           <v-form ref="form" v-model="valid">
             <v-card-text>
               <v-text-field
                 class="mb-2"
-                v-model="company.companyname"
+                v-model="department.dcompanyname"
                 :rules="companyrules"
                 clearable
                 label="Company Name"
@@ -29,28 +28,19 @@
 
               <v-text-field
                 class="mb-2"
-                label="User name"
-                v-model="company.username"
-                :rules="userrules"
+                label="Department name"
+                v-model="department.department"
+                :rules="departmentrules"
                 clearable
               ></v-text-field>
 
               <v-text-field
                 class="mb-2"
-                label="Email"
-                v-model="company.useremail"
-                :rules="emailrules"
+                label="number of employees"
+                v-model="department.employess"
+                :rules="employessrules"
                 clearable
                 required
-              ></v-text-field>
-
-              <v-text-field
-                class="mb-2"
-                type="password"
-                v-model="company.password"
-                :rules="passwordrules"
-                clearable
-                label="Password"
               ></v-text-field>
             </v-card-text>
             <v-card-actions>
@@ -73,28 +63,14 @@
   </v-dialog>
   <v-snackbar
     v-model="snackbar"
-    color="green-lighten-1"
+    color="orange-lighten-1"
     rounded="pill"
     :timeout="2000"
   >
-    <span class="text-white">Added!!</span>
+    <span class="text-white">Updated!!</span>
 
     <template v-slot:actions>
       <v-btn color="white" variant="text" @click="snackbar = false">
-        Close
-      </v-btn>
-    </template>
-  </v-snackbar>
-  <v-snackbar
-    v-model="errorsnackbar"
-    color="red-lighten-1"
-    rounded="pill"
-    :timeout="2000"
-  >
-    <span class="text-white">form not valid</span>
-
-    <template v-slot:actions>
-      <v-btn color="white" variant="text" @click="errorsnackbar = false">
         Close
       </v-btn>
     </template>
@@ -103,17 +79,17 @@
 
 <script>
 export default {
+  props: ["arrindex", "item"],
   data() {
     return {
-      company: {
-        companyname: "",
-        username: "",
-        useremail: "",
-        password: "",
+      department: {
+        dcompanyname: this.item.dcompanyname,
+        department: this.item.department,
+        employess: this.item.employess,
       },
       snackbar: false,
-      errorsnackbar: false,
       valid: false,
+
       companyrules: [
         (value) => {
           if (value) return true;
@@ -126,7 +102,7 @@ export default {
           return "* Company Name Cannot be less than 3 characters";
         },
       ],
-      userrules: [
+      departmentrules: [
         (value) => {
           if (value) return true;
 
@@ -135,54 +111,49 @@ export default {
         (value) => {
           if (value.length >= 3) return true;
 
-          return "* Name Cannot be less than 3 characters";
+          return "* Department Name Cannot be less than 3 characters";
         },
       ],
-      emailrules: [
+      employessrules: [
         (value) => {
           if (value) return true;
 
           return "* Field Cannot Be Empty.";
         },
         (value) => {
-          if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value)) {
+          if (!isNaN(value)) {
             return true;
           }
 
-          return "* Enter Valid email";
-        },
-      ],
-      passwordrules: [
-        (value) => {
-          if (value) return true;
-
-          return "* Field Cannot Be Empty.";
-        },
-        (value) => {
-          if (value.length >= 8) return true;
-
-          return "* Password Cannot be less than 8";
+          return "* Enter Valid number";
         },
       ],
     };
   },
   methods: {
-    async printcompany() {
+    printcompany() {
       if (this.$refs.form.validate() && this.valid) {
-        console.log(this.company);
-        const currentcompanies =
-          JSON.parse(localStorage.getItem("companydata")) || [];
-        console.log(currentcompanies);
-        currentcompanies.push(this.company);
-        console.log(currentcompanies);
+        console.log(this.department);
+        const currentdepartments =
+          JSON.parse(localStorage.getItem("departmentdata")) || [];
+        currentdepartments[this.arrindex] = this.department;
         // Store the object into storage
-        localStorage.setItem("companydata", JSON.stringify(currentcompanies));
+        localStorage.setItem(
+          "departmentdata",
+          JSON.stringify(currentdepartments)
+        );
         this.$emit("update-event");
+
         this.snackbar = true;
-      } else {
-        this.errorsnackbar = true;
       }
     },
+    savepropdata() {
+      //   console.log(props.item);
+    },
+  },
+
+  mounted() {
+    this.savepropdata();
   },
 };
 </script>

@@ -2,7 +2,7 @@
   <v-container class="mt-10">
     <v-row>
       <v-layout class="flex-row align-center">
-        <h1>Company</h1>
+        <h1 class="ms-2">Company</h1>
         <v-spacer></v-spacer>
         <AddCompany @update-event="upd" />
         <!-- <v-btn variant="flat" class="bg-green">Add Company</v-btn> -->
