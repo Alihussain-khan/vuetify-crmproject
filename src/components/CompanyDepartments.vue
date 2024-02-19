@@ -5,7 +5,7 @@
         v-bind="props"
         text="Show departments"
         variant="flat"
-        class="bg-indigo-lighten-1 text-white"
+        class="bg-#b9d7d9 text-white"
       >
       </v-chip>
     </template>

@@ -5,7 +5,7 @@
         v-bind="props"
         text="Add Company"
         variant="flat"
-        class="bg-green-lighten-1"
+        class="bg-addbutton"
       >
       </v-btn>
     </template>

@@ -6,7 +6,7 @@
         v-bind="props"
         text="Add Department"
         variant="flat"
-        class="bg-green-lighten-1"
+        class="bg-addbutton"
       >
       </v-btn>
     </template>
