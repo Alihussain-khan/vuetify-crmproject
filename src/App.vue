@@ -1,5 +1,5 @@
 <template>
-  <v-app class="bg-grey-darken-4 error-">
+  <v-app>
     <v-main>
       <router-view />
     </v-main>
