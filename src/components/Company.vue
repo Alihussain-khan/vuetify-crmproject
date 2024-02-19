@@ -4,7 +4,7 @@
       <v-layout class="flex-row align-center">
         <h1>Company</h1>
         <v-spacer></v-spacer>
-        <AddCompany />
+        <AddCompany @update-event="upd" />
         <!-- <v-btn variant="flat" class="bg-green">Add Company</v-btn> -->
       </v-layout>
     </v-row>
