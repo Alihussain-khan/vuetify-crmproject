@@ -89,7 +89,7 @@ export default {
   },
   mounted() {
     this.currentcompanies = JSON.parse(localStorage.getItem("companydata"));
-    this.username = this.currentcompanies[0].username;
+
     // console.log(this.currentcompanies);
   },
   methods: {
