@@ -2,7 +2,6 @@
   <v-dialog width="500" transition="dialog-top-transition">
     <template v-slot:activator="{ props }">
       <v-btn
-        @update-event="upd"
         v-bind="props"
         text="Add Company"
         variant="flat"
@@ -103,6 +102,7 @@
 
 <script>
 export default {
+  emits: ["update-event"],
   data() {
     return {
       company: {

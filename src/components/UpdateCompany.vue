@@ -83,6 +83,7 @@
 
 <script>
 export default {
+  emits: ["update-event"],
   props: ["arrindex", "item"],
   data() {
     return {
@@ -150,7 +151,7 @@ export default {
   methods: {
     printcompany() {
       if (this.$refs.form.validate() && this.valid) {
-        console.log(this.company);
+        // console.log(this.company);
         const currentcompanies =
           JSON.parse(localStorage.getItem("companydata")) || [];
         currentcompanies[this.arrindex] = this.company;

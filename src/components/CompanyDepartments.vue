@@ -66,13 +66,8 @@ export default {
       localStorage.getItem("departmentdata")
     );
     this.companydepartment = this.currentdepartments.filter((element) => {
-      console.log(element.dcompanyname);
       return element.dcompanyname === this.item.companyname;
     });
-
-    console.log(this.item.companyname);
-    console.log(this.currentdepartments);
-    console.log("not" + this.companydepartment);
   },
 };
 </script>

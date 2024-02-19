@@ -78,6 +78,7 @@ import UpdateCompany from "@/components/UpdateCompany.vue";
 import CompanyDepartments from "@/components/CompanyDepartments.vue";
 
 export default {
+  emits: ["update-event"],
   data() {
     return {
       snackbar: false,
@@ -89,7 +90,7 @@ export default {
   mounted() {
     this.currentcompanies = JSON.parse(localStorage.getItem("companydata"));
     this.username = this.currentcompanies[0].username;
-    console.log(this.currentcompanies);
+    // console.log(this.currentcompanies);
   },
   methods: {
     del(e) {
