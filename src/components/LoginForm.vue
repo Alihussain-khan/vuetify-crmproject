@@ -110,6 +110,8 @@ export default {
       stream: null,
       video: null,
       hidden: false,
+      users: "",
+      validateuser: "",
       // Input validation rules
       inputrules: [
         (value) => {
@@ -172,7 +174,12 @@ export default {
           userimage: this.userimage,
         };
         console.log(this.finaldata);
-        router.push("/company");
+        if (this.checkcredentials()) {
+          this.storetoken();
+          router.push("/dashboard/company");
+        } else {
+          console.log("wrong password");
+        }
       } else {
         console.log("empty");
       }
@@ -232,6 +239,29 @@ export default {
         );
       }
     },
+    checkcredentials() {
+      this.validateuser = this.users.find((item) => {
+        return item.useremail === this.mail;
+      });
+      // console.log(this.users);
+      // console.log(this.validateuser);
+      if (
+        this.password === this.validateuser.password &&
+        this.mail === this.validateuser.useremail
+      ) {
+        console.log("good credentials");
+        return true;
+      } else {
+        console.log("bad credentials");
+        return false;
+      }
+    },
+    storetoken() {
+      window.localStorage.setItem("token", "1");
+    },
+  },
+  mounted() {
+    this.users = JSON.parse(localStorage.getItem("userdata"));
   },
 };
 </script>

@@ -24,7 +24,10 @@
         </v-list-item>
       </RouterLink> -->
 
-      <RouterLink to="/company" class="text-decoration-none text-white">
+      <RouterLink
+        to="/dashboard/company"
+        class="text-decoration-none text-white"
+      >
         <v-tooltip activator="parent" location="right">Comapnies</v-tooltip>
         <v-list-item
           prepend-icon="mdi-domain"
@@ -34,7 +37,10 @@
         </v-list-item>
       </RouterLink>
 
-      <RouterLink to="/department" class="text-decoration-none text-white">
+      <RouterLink
+        to="/dashboard/department"
+        class="text-decoration-none text-white"
+      >
         <v-tooltip activator="parent" location="right">Departments</v-tooltip>
         <v-list-item
           prepend-icon="mdi-apps"
@@ -43,7 +49,7 @@
         >
         </v-list-item>
       </RouterLink>
-      <RouterLink to="/user" class="text-decoration-none text-white">
+      <RouterLink to="/dashboard/user" class="text-decoration-none text-white">
         <v-tooltip activator="parent" location="right">Users</v-tooltip>
         <v-list-item
           prepend-icon="mdi-account"
@@ -53,12 +59,24 @@
         </v-list-item>
       </RouterLink>
     </v-list>
+    <template v-slot:append>
+      <RouterLink to="/" class="text-decoration-none text-white">
+        <v-tooltip activator="parent" location="right">Logout</v-tooltip>
+        <v-list-item
+          prepend-icon="mdi-logout"
+          title="Logout"
+          class="customclass"
+        >
+        </v-list-item>
+      </RouterLink>
+    </template>
   </v-navigation-drawer>
 </template>
 
 <script>
 import { RouterLink } from "vue-router";
 import Dashboard from "./Dashboard.vue";
+import router from "@/router";
 export default {
   data() {
     return {
@@ -67,6 +85,11 @@ export default {
     };
   },
   components: { Dashboard },
+  methods: {
+    logout() {
+      router.push("/");
+    },
+  },
 };
 </script>
 
