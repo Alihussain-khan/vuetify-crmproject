@@ -76,6 +76,7 @@
 <script>
 import UpdateCompany from "@/components/UpdateCompany.vue";
 import CompanyDepartments from "@/components/CompanyDepartments.vue";
+import store from "@/Store/Auth.js";
 
 export default {
   emits: ["update-event"],
@@ -85,12 +86,11 @@ export default {
       refreshsnackbar: false,
       currentcompanies: "",
       username: "",
+      toke: "",
     };
   },
   mounted() {
-    this.currentcompanies = JSON.parse(localStorage.getItem("companydata"));
-
-    // console.log(this.currentcompanies);
+    this.upd();
   },
   methods: {
     del(e) {
@@ -103,8 +103,20 @@ export default {
       this.snackbar = true;
     },
     upd() {
-      this.currentcompanies = JSON.parse(localStorage.getItem("companydata"));
-      this.refreshsnackbar = true;
+      this.token = JSON.parse(localStorage.getItem("token"));
+      console.log(this.token);
+      if (this.token == "1") {
+        this.currentcompanies = JSON.parse(localStorage.getItem("companydata"));
+      } else {
+        let arr = JSON.parse(localStorage.getItem("companydata"));
+        console.log(arr);
+        this.currentcompanies = arr.filter((element) => {
+          return element.companyname === this.$store.state.companyname;
+        });
+        console.log(this.currentcompanies);
+      }
+
+      console.log(this.currentcompanies);
     },
   },
   components: {},

@@ -127,7 +127,7 @@ export default {
           return "* Description Cannot be less than 3 characters";
         },
       ],
-      adress: [
+      adressrules: [
         (value) => {
           if (value) return true;
 

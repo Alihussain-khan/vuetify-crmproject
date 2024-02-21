@@ -98,7 +98,7 @@
 
 <script>
 import router from "@/router";
-import store from "@/Store/Auth.js";
+// import store from "@/Store/Auth.js";
 export default {
   data() {
     return {
@@ -113,6 +113,7 @@ export default {
       hidden: false,
       users: "",
       validateuser: "",
+      role: "",
       // Input validation rules
       inputrules: [
         (value) => {
@@ -176,8 +177,9 @@ export default {
         };
         console.log(this.finaldata);
         if (this.checkcredentials()) {
-          this.storetoken();
           this.userrole();
+          this.storetoken();
+
           router.push("/dashboard/company");
         } else {
           console.log("wrong password");
@@ -259,7 +261,7 @@ export default {
       }
     },
     storetoken() {
-      window.localStorage.setItem("token", "1");
+      window.localStorage.setItem("token", this.role);
     },
     userrole() {
       // const currentusers = JSON.stringify(
@@ -269,8 +271,15 @@ export default {
       let singleuser = this.users.filter((element) => {
         return this.mail === element.useremail;
       });
-      console.log(singleuser[0].role);
-      store.state.role = singleuser[0].role;
+
+      this.role = singleuser[0].role;
+      const companyname = singleuser[0].companyname;
+      const department = singleuser[0].department;
+      // console.log(role);
+      this.$store.commit("setrole", this.role);
+      this.$store.commit("setcompanyname", companyname);
+      // console.log(this.$store.state.role);
+      this.$store.commit("setdepartment", department);
     },
   },
   mounted() {
