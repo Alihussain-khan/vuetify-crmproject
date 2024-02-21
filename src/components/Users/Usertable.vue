@@ -22,7 +22,7 @@
       </thead>
 
       <tbody>
-        <tr v-for="(item, index) in currentusers" :key="index">
+        <tr v-for="(item, index) in userdata" :key="index">
           <td>{{ index + 1 }}</td>
 
           <td>{{ item.username }}</td>
@@ -83,11 +83,12 @@ export default {
       snackbar: false,
       refreshsnackbar: false,
       currentusers: null,
+      userdata: "",
+      token: "",
     };
   },
   mounted() {
-    this.currentusers = JSON.parse(localStorage.getItem("userdata"));
-    console.log(this.currentusers);
+    this.upd();
   },
   methods: {
     del(e) {
@@ -97,7 +98,20 @@ export default {
       this.snackbar = true;
     },
     upd() {
-      this.currentusers = JSON.parse(localStorage.getItem("userdata"));
+      this.token = JSON.parse(localStorage.getItem("token"));
+      console.log(this.token);
+      if (this.token == "1") {
+        this.userdata = JSON.parse(localStorage.getItem("userdata"));
+      } else {
+        let arr = JSON.parse(localStorage.getItem("userdata"));
+        console.log(arr);
+        this.userdata = arr.filter((element) => {
+          return element.companyname === this.$store.state.companyname;
+        });
+        console.log(this.userdata);
+      }
+
+      console.log(this.userdata);
       this.refreshsnackbar = true;
     },
   },

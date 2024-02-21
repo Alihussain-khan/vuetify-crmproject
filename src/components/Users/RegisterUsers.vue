@@ -127,6 +127,7 @@ export default {
         department: "",
         role: "",
       },
+      token: "",
       snackbar: false,
       errorsnackbar: false,
       currentcompanies: "",
@@ -152,6 +153,24 @@ export default {
             return true;
           } else {
             return "* Company Not Found";
+          }
+        },
+        (value) => {
+          this.token = JSON.parse(localStorage.getItem("token"));
+          console.log(this.token);
+          if (this.token == "1") {
+            return true;
+          } else {
+            let arr = JSON.parse(localStorage.getItem("companydata"));
+            console.log(arr);
+            this.currentcompanies = arr.filter((element) => {
+              return element.companyname === this.$store.state.companyname;
+            });
+            if (value === this.$store.state.companyname) {
+              return true;
+            } else {
+              return "* this is not your company";
+            }
           }
         },
       ],
@@ -213,6 +232,24 @@ export default {
             return true;
           } else {
             return "* department Not Found";
+          }
+        },
+        (value) => {
+          this.token = JSON.parse(localStorage.getItem("token"));
+          console.log(this.token);
+          if (this.token == "1") {
+            return true;
+          } else {
+            let arr = JSON.parse(localStorage.getItem("departmentdata"));
+            console.log(arr);
+            this.currentdepartments = arr.filter((element) => {
+              return element.department === this.$store.state.department;
+            });
+            if (value === this.$store.state.department) {
+              return true;
+            } else {
+              return "* this is not your department";
+            }
           }
         },
       ],
