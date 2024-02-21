@@ -128,6 +128,20 @@ export default {
 
           return "* Company Name Cannot be less than 3 characters";
         },
+        // (value) => {
+        //   let companies = JSON.parse(
+        //     window.localStorage.getItem("companydata")
+        //   );
+        //   let validatecompany = companies.filter((element) => {
+        //     return value === element.companyname;
+        //   });
+        //   console.log(validatecompany);
+        //   if (validatecompany.length != 0) {
+        //     return true;
+        //   } else {
+        //     return "* Company Not Found";
+        //   }
+        // },
       ],
       userrules: [
         (value) => {

@@ -75,12 +75,14 @@
 
 <script>
 import Updatedepartment from "@/components/Deparmtents/Updatedepartment.vue";
+import store from "@/Store/Auth.js";
 export default {
   data() {
     return {
       snackbar: false,
       refreshsnackbar: false,
       currentdepartments: null,
+      currentcompanies: "",
       token: "",
     };
   },
@@ -113,6 +115,7 @@ export default {
         console.log(this.currentdepartments);
       }
 
+      console.log(this.currentdepartments);
       this.refreshsnackbar = true;
     },
   },

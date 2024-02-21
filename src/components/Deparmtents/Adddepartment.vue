@@ -94,6 +94,7 @@
 
 <script>
 export default {
+  emits: ["update-event"],
   data() {
     return {
       department: {

@@ -117,6 +117,7 @@ export default {
       }
 
       console.log(this.currentcompanies);
+      this.refreshsnackbar = true;
     },
   },
   components: {},
