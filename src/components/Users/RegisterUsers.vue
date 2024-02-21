@@ -129,6 +129,8 @@ export default {
       },
       snackbar: false,
       errorsnackbar: false,
+      currentcompanies: "",
+      currentdepartments: "",
       valid: false,
       companyrules: [
         (value) => {
@@ -140,6 +142,17 @@ export default {
           if (value.length >= 3) return true;
 
           return "* Company Name Cannot be less than 3 characters";
+        },
+        (value) => {
+          let validatecompany = this.currentcompanies.filter((element) => {
+            return value === element.companyname;
+          });
+          console.log(validatecompany);
+          if (validatecompany.length != 0) {
+            return true;
+          } else {
+            return "* Company Not Found";
+          }
         },
       ],
       userrules: [
@@ -191,6 +204,17 @@ export default {
 
           return "* Department name cannot be less than 3 characters";
         },
+        (value) => {
+          let validatedepartment = this.currentdepartments.filter((element) => {
+            return value === element.department;
+          });
+          console.log(validatedepartment);
+          if (validatedepartment.length != 0) {
+            return true;
+          } else {
+            return "* department Not Found";
+          }
+        },
       ],
       rolerules: [
         (value) => {
@@ -224,6 +248,12 @@ export default {
         this.errorsnackbar = true;
       }
     },
+  },
+  mounted() {
+    this.currentcompanies =
+      JSON.parse(localStorage.getItem("companydata")) || [];
+    this.currentdepartments =
+      JSON.parse(localStorage.getItem("departmentdata")) || [];
   },
 };
 </script>
