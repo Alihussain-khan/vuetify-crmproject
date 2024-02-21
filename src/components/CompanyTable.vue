@@ -4,7 +4,7 @@
       <thead>
         <tr>
           <th class="text-left bg-white">Count</th>
-          <th class="text-left bg-white">Name</th>
+          <th class="text-left bg-white">Company Name</th>
           <th class="text-left bg-white">description</th>
           <th class="text-left bg-white">Address</th>
           <th class="text-left bg-white"></th>

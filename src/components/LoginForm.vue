@@ -98,6 +98,7 @@
 
 <script>
 import router from "@/router";
+import store from "@/Store/Auth.js";
 export default {
   data() {
     return {
@@ -176,6 +177,7 @@ export default {
         console.log(this.finaldata);
         if (this.checkcredentials()) {
           this.storetoken();
+          this.userrole();
           router.push("/dashboard/company");
         } else {
           console.log("wrong password");
@@ -258,6 +260,17 @@ export default {
     },
     storetoken() {
       window.localStorage.setItem("token", "1");
+    },
+    userrole() {
+      // const currentusers = JSON.stringify(
+      //   window.localStorage.parse("userdata")
+      // );
+      // console.log(currentusers);
+      let singleuser = this.users.filter((element) => {
+        return this.mail === element.useremail;
+      });
+      console.log(singleuser[0].role);
+      store.state.role = singleuser[0].role;
     },
   },
   mounted() {

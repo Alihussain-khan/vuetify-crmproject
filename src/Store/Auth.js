@@ -4,5 +4,6 @@ export default createStore({
   state: {
     auth: null,
     token: null,
+    role: null,
   },
 });

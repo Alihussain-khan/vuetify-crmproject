@@ -4,7 +4,7 @@
       <v-layout class="flex-row align-center">
         <h1 class="ms-2">Company</h1>
         <v-spacer></v-spacer>
-        <AddCompany @update-event="upd" />
+        <AddCompany v-if="$store.state.role === '1'" @update-event="upd" />
         <!-- <v-btn variant="flat" class="bg-green">Add Company</v-btn> -->
       </v-layout>
     </v-row>
@@ -17,6 +17,7 @@
 <script>
 import AddCompany from "./AddCompany.vue";
 import CompanyTable from "./CompanyTable.vue";
+import store from "@/Store/Auth.js";
 
 export default {
   components: { AddCompany, CompanyTable },
