@@ -81,13 +81,11 @@ export default {
       snackbar: false,
       refreshsnackbar: false,
       currentdepartments: null,
+      token: "",
     };
   },
   mounted() {
-    this.currentdepartments = JSON.parse(
-      localStorage.getItem("departmentdata")
-    );
-    console.log(this.currentdepartments);
+    this.upd();
   },
   methods: {
     del(e) {
@@ -100,9 +98,21 @@ export default {
       this.snackbar = true;
     },
     upd() {
-      this.currentdepartments = JSON.parse(
-        localStorage.getItem("departmentdata")
-      );
+      this.token = JSON.parse(localStorage.getItem("token"));
+      console.log(this.token);
+      if (this.token == "1") {
+        this.currentdepartments = JSON.parse(
+          localStorage.getItem("departmentdata")
+        );
+      } else {
+        let arr = JSON.parse(localStorage.getItem("departmentdata"));
+        console.log(arr);
+        this.currentdepartments = arr.filter((element) => {
+          return element.dcompanyname === this.$store.state.companyname;
+        });
+        console.log(this.currentdepartments);
+      }
+
       this.refreshsnackbar = true;
     },
   },
