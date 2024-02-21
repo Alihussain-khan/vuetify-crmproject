@@ -90,8 +90,8 @@ export default {
     this.upd();
   },
   methods: {
+    //departmentdata
     del(e) {
-      // this.currentcompanies =
       this.currentdepartments.splice(e, 1);
       localStorage.setItem(
         "departmentdata",
@@ -101,8 +101,8 @@ export default {
     },
     upd() {
       this.token = JSON.parse(localStorage.getItem("token"));
-      console.log(this.token);
-      if (this.token == "1") {
+
+      if (this.token === 1) {
         this.currentdepartments = JSON.parse(
           localStorage.getItem("departmentdata")
         );
