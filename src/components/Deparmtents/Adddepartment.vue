@@ -106,6 +106,7 @@ export default {
       snackbar: false,
       errorsnackbar: false,
       valid: false,
+      token: "",
       companyrules: [
         (value) => {
           if (value) return true;
@@ -126,6 +127,26 @@ export default {
             return true;
           } else {
             return "* Company Not Found";
+          }
+        },
+        (value) => {
+          this.token = JSON.parse(localStorage.getItem("token"));
+          console.log(this.token);
+          if (this.token == "1") {
+            return true;
+          } else {
+            let arr = JSON.parse(localStorage.getItem("companydata"));
+            console.log(arr);
+            this.currentcompanies = arr.filter((element) => {
+              return element.companyname === this.$store.state.companyname;
+            });
+            if (value === this.$store.state.companyname) {
+              return true;
+            } else {
+              return "* this is not your company";
+            }
+
+            console.log(this.currentcompanies);
           }
         },
       ],
