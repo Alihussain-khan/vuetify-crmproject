@@ -4,9 +4,9 @@
       <thead>
         <tr>
           <th class="text-left bg-white">Count</th>
-          <th class="text-left bg-white">Company Name</th>
-          <th class="text-left bg-white">User</th>
-          <th class="text-left bg-white">Email</th>
+          <th class="text-left bg-white">Name</th>
+          <th class="text-left bg-white">description</th>
+          <th class="text-left bg-white">Address</th>
           <th class="text-left bg-white"></th>
           <th class="text-left bg-white"></th>
           <th class="text-left bg-white">
@@ -23,8 +23,8 @@
         <tr v-for="(item, index) in currentcompanies" :key="index">
           <td>{{ index + 1 }}</td>
           <td>{{ item.companyname }}</td>
-          <td>{{ item.username }}</td>
-          <td>{{ item.useremail }}</td>
+          <td>{{ item.description }}</td>
+          <td>{{ item.address }}</td>
           <td>
             <v-chip
               variant="elevated"

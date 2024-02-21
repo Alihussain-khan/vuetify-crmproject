@@ -27,24 +27,18 @@
 
               <v-text-field
                 class="mb-2"
-                v-model="company.username"
-                :rules="userrules"
+                label="Company description"
+                v-model="company.description"
+                :rules="descriptionrules"
                 clearable
               ></v-text-field>
 
               <v-text-field
                 class="mb-2"
-                v-model="company.useremail"
+                label="Company Adress"
+                v-model="company.address"
+                :rules="adressrules"
                 clearable
-                required
-              ></v-text-field>
-
-              <v-text-field
-                class="mb-2"
-                v-model="company.password"
-                :rules="passwordrules"
-                clearable
-                label="Password"
               ></v-text-field>
             </v-card-text>
             <v-card-actions>
@@ -89,9 +83,8 @@ export default {
     return {
       company: {
         companyname: this.item.companyname,
-        username: this.item.username,
-        useremail: this.item.useremail,
-        password: this.item.password,
+        description: this.item.description,
+        address: this.item.address,
       },
       snackbar: false,
       valid: false,

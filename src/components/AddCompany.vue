@@ -28,28 +28,18 @@
 
               <v-text-field
                 class="mb-2"
-                label="User name"
-                v-model="company.username"
-                :rules="userrules"
+                label="Company description"
+                v-model="company.description"
+                :rules="descriptionrules"
                 clearable
               ></v-text-field>
 
               <v-text-field
                 class="mb-2"
-                label="Email"
-                v-model="company.useremail"
-                :rules="emailrules"
+                label="Company Adress"
+                v-model="company.address"
+                :rules="adressrules"
                 clearable
-                required
-              ></v-text-field>
-
-              <v-text-field
-                class="mb-2"
-                type="password"
-                v-model="company.password"
-                :rules="passwordrules"
-                clearable
-                label="Password"
               ></v-text-field>
             </v-card-text>
             <v-card-actions>
@@ -107,9 +97,8 @@ export default {
     return {
       company: {
         companyname: "",
-        username: "",
-        useremail: "",
-        password: "",
+        description: "",
+        address: "",
       },
       snackbar: false,
       errorsnackbar: false,
@@ -126,7 +115,7 @@ export default {
           return "* Company Name Cannot be less than 3 characters";
         },
       ],
-      userrules: [
+      descriptionrules: [
         (value) => {
           if (value) return true;
 
@@ -135,33 +124,19 @@ export default {
         (value) => {
           if (value.length >= 3) return true;
 
-          return "* Name Cannot be less than 3 characters";
+          return "* Description Cannot be less than 3 characters";
         },
       ],
-      emailrules: [
+      adress: [
         (value) => {
           if (value) return true;
 
           return "* Field Cannot Be Empty.";
         },
         (value) => {
-          if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value)) {
-            return true;
-          }
+          if (value.length >= 3) return true;
 
-          return "* Enter Valid email";
-        },
-      ],
-      passwordrules: [
-        (value) => {
-          if (value) return true;
-
-          return "* Field Cannot Be Empty.";
-        },
-        (value) => {
-          if (value.length >= 8) return true;
-
-          return "* Password Cannot be less than 8";
+          return "* Address Cannot be less than 3 characters";
         },
       ],
     };
