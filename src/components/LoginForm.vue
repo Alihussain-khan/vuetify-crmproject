@@ -176,6 +176,9 @@ export default {
           userimage: this.userimage,
         };
         console.log(this.finaldata);
+        console.log(this.userimage);
+        //sending the user without any credentials because there is no backend attached to it
+        router.push("/dashboard/company");
         if (this.checkcredentials()) {
           this.userrole();
           this.storetoken();

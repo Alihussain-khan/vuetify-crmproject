@@ -31,7 +31,6 @@ const router = createRouter({
       path: "/dashboard",
       name: "Dashboard",
       component: Dashboard,
-      meta: { needsauth: "true" },
       //     beforeEnter: (to, from) => {
       //   window.localStorage.removeItem("token");
       //   // console.log("atleast this part works");
